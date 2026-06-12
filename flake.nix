@@ -1,20 +1,28 @@
 {
     inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+        nixpkgs-2605.url = "github:nixos/nixpkgs/nixos-26.05";
+        nixpkgs-2511.url = "github:nixos/nixpkgs/nixos-25.11";
+        nixpkgs-2505.url = "github:nixos/nixpkgs/nixos-25.05";
+        nixpkgs-2411.url = "github:nixos/nixpkgs/nixos-24.11";
     };
-    outputs = { self, nixpkgs, ... }: {
+    outputs = { self, ... }@inputs:
+    {
         packages = {
             x86_64-linux = {
-                default = nixpkgs.legacyPackages.x86_64.hello;
+                default = inputs.nixpkgs-unstable.legacyPackages.x86_64.hello;
             };
             i686-linux = {
-                default = nixpkgs.legacyPackages.i686-linux.hello;
+                default = inputs.nixpkgs-unstable.legacyPackages.i686-linux.hello;
             };
             aarch64-linux = {
-                default = nixpkgs.legacyPackages.aarch64-linux.hello;
+                default = inputs.nixpkgs-unstable.legacyPackages.aarch64-linux.hello;
             };
             armv7l-linux = {
-                default = nixpkgs.legacyPackages.armv7l-linux.hello;
+                default = inputs.nixpkgs-unstable.legacyPackages.armv7l-linux.hello;
+            };
+            armv6l-linux = {
+                default = inputs.nixpkgs-unstable.legacyPackages.armv6l-linux.hello;
             };
         };
 
