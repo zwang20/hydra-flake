@@ -10,7 +10,7 @@
     {
         packages = {
             x86_64-linux = {
-                default = inputs.nixpkgs-unstable.legacyPackages.x86_64.hello;
+                default = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.hello;
             };
             i686-linux = {
                 default = inputs.nixpkgs-unstable.legacyPackages.i686-linux.hello;
