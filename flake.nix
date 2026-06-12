@@ -15,14 +15,20 @@
         "armv7l-linux"
         "armv6l-linux"
     ];
+    packages = [
+        "stdenv"
+        "firefox"
+    ];
     in
     {
         packages = builtins.listToAttrs (map (target: {
             name = target;
             value = with inputs.nixpkgs-unstable.legacyPackages.${target}; {
                 default = hello;
-                fastfetch = fastfetch;
-            };
+            } // builtins.listToAttrs (map (package: {
+                name = package;
+                value = package;
+            }) packages);
         }) targets);
 
         hydraJobs = {
