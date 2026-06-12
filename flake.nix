@@ -7,24 +7,23 @@
         nixpkgs-2411.url = "github:nixos/nixpkgs/nixos-24.11";
     };
     outputs = { self, ... }@inputs:
+    let
+    targets = [
+        "x86_64-linux"
+        "i686-linux"
+        "aarch64-linux"
+        "armv7l-linux"
+        "armv6l-linux"
+    ];
+    in
     {
-        packages = {
-            x86_64-linux = {
-                default = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.hello;
+        packages = builtins.listToAttrs (map (target: {
+            name = target;
+            value = with inputs.nixpkgs-unstable.legacyPackages.${target}; {
+                default = hello;
+                fastfetch = fastfetch;
             };
-            i686-linux = {
-                default = inputs.nixpkgs-unstable.legacyPackages.i686-linux.hello;
-            };
-            aarch64-linux = {
-                default = inputs.nixpkgs-unstable.legacyPackages.aarch64-linux.hello;
-            };
-            armv7l-linux = {
-                default = inputs.nixpkgs-unstable.legacyPackages.armv7l-linux.hello;
-            };
-            armv6l-linux = {
-                default = inputs.nixpkgs-unstable.legacyPackages.armv6l-linux.hello;
-            };
-        };
+        }) targets);
 
         hydraJobs = {
             inherit (self) packages;
