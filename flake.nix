@@ -20,6 +20,13 @@
         "fastfetch"
         "firefox"
     ];
+    pkgs = builtins.listToAttrs (map (target: {
+        name = target;
+        value = import inputs.nixpkgs-unstable {
+            system = "${target}";
+            config.problems.handlers.defaut.broken = "warn";
+        };
+    }) targets);
     in
     {
         packages = builtins.listToAttrs (map (target: {
@@ -28,7 +35,7 @@
                 default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
             } // builtins.listToAttrs (map (package: {
                 name = package;
-                value = inputs.nixpkgs-unstable.legacyPackages.${target}.${package};
+                value = pkgs.legacyPackages.${target}.${package};
             }) packages);
         }) targets);
 
