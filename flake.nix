@@ -9,9 +9,9 @@
     outputs = { self, ... }@inputs:
     let
     targets = [
-        "x86_64-linux"
+        #"x86_64-linux"
         "i686-linux"
-        "aarch64-linux"
+        #"aarch64-linux"
         "armv7l-linux"
         "armv6l-linux"
     ];
@@ -19,6 +19,7 @@
         "stdenv"
         "fastfetch"
         "firefox"
+        "unbound"
     ];
     pkgs = builtins.listToAttrs (map (target: {
         name = target;
