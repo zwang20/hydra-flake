@@ -16,23 +16,85 @@
         "armv6l-linux"
     ];
     packages = [
+        #a
+        "ansible"
+        "apache-httpd"
+        #b
+        "bash"
+        "binutils"
+        "blender"
+        "boost"
+        #c
+        "chromium"
+        "claws-mail"
+        "cmake"
+        "coreutils"
+        "cppcheck"
+        "cups"
+        "curl"
         #d
-        "dovecot"
+        "darktable"
+        "djvulibre"
         "dnsmasq"
+        "dosbox"
+        "dovecot"
+        "doxygen"
+        #e
+        "emacs"
+        "evince"
         #f
         "fastfetch"
+        "ffmpeg"
         "firefox"
+        "fish"
+        "freecad"
+        "freeciv"
         #g
+        "gcc"
+        "gdb"
+        "geeqie"
+        "gimp"
         "git"
+        "gnupg"
+        "go"
+        "godot"
         "grafana"
+        "graphvis"
+        "grub"
+        "gtk4"
         #h
+        "haproxy"
         "home-assistant"
         "hydra"
+        "hyprland"
         #i
         "i2p"
         "i2pd"
+        "i3"
+        "imagemagick"
+        "inkscape"
         #j
         "jellyfin"
+        "jq"
+        #k
+        "krita"
+        "kubernetes"
+        #l
+        "lame"
+        "libreoffice"
+        "linux"
+        "llvm"
+        #m
+        "mariadb-server"
+        "maxima"
+        "mc"
+        "mesa"
+        "meson"
+        "mplayer"
+        "mutt"
+        "mysql"
+        #n
+        "nix"
         #p
         "pihole"
         "postfix"
