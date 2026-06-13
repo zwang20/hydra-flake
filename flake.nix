@@ -35,7 +35,7 @@
                 default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
             } // builtins.listToAttrs (map (package: {
                 name = package;
-                value = pkgs.legacyPackages.${target}.${package};
+                value = pkgs.${target}.${package};
             }) packages);
         }) targets);
 
