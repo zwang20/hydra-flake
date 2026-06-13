@@ -27,6 +27,7 @@
         "grafana"
         #h
         "home-assistant"
+        "hydra"
         #i
         "i2p"
         "i2pd"
@@ -35,7 +36,7 @@
         #p
         "pihole"
         "postfix"
-        "postqresql"
+        "postgresql"
         "prometheus"
         #s
         "samba"
