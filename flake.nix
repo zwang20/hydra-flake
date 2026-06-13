@@ -16,15 +16,31 @@
         "armv6l-linux"
     ];
     packages = [
+        #d
+        "dovecot"
+        "dnsmasq"
         #f
         "fastfetch"
         "firefox"
+        #g
+        "git"
+        "grafana"
+        #h
+        "home-assistant"
         #i
         "i2p"
         "i2pd"
+        #j
+        "jellyfin"
+        #p
+        "pihole"
+        "postfix"
+        "postqresql"
+        "prometheus"
         #s
+        "samba"
         "stdenv"
-        #
+        #t
         "tor"
         # u
         "unbound"
