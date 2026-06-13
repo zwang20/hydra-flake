@@ -24,11 +24,7 @@
         name = target;
         value = import inputs.nixpkgs-unstable {
             system = "${target}";
-            config.problems.matchers = [
-                {
-                    handler = "warn";  # rfc 0127
-                }
-            ];
+            config.allowBroken = true;
         };
     }) targets);
     in
