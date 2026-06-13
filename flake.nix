@@ -113,7 +113,7 @@
         value = import inputs.nixpkgs-unstable {
             system = "${target}";
             config.allowBroken = true;
-            config.allowUnsupportedSystems = true;
+            config.allowUnsupportedSystem = true;
         };
     }) targets);
     in
