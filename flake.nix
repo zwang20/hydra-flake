@@ -18,7 +18,7 @@
     packages = [
         #a
         "ansible"
-        "apache-httpd"
+        "apacheHttpd"
         #b
         "bash"
         "binutils"
@@ -59,8 +59,8 @@
         "go"
         "godot"
         "grafana"
-        "graphvis"
-        "grub"
+        "graphviz"
+        "grub2"
         "gtk4"
         #h
         "haproxy"
@@ -92,7 +92,7 @@
         "meson"
         "mplayer"
         "mutt"
-        "mysql"
+        "mysql84"
         #n
         "nix"
         #p
