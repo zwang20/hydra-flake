@@ -16,9 +16,17 @@
         "armv6l-linux"
     ];
     packages = [
-        "stdenv"
+        #f
         "fastfetch"
         "firefox"
+        #i
+        "i2p"
+        "i2pd"
+        #s
+        "stdenv"
+        #
+        "tor"
+        # u
         "unbound"
     ];
     pkgs = builtins.listToAttrs (map (target: {
