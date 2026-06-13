@@ -17,17 +17,18 @@
     ];
     packages = [
         "stdenv"
+        "fastfetch"
         "firefox"
     ];
     in
     {
         packages = builtins.listToAttrs (map (target: {
             name = target;
-            value = with inputs.nixpkgs-unstable.legacyPackages.${target}; {
-                default = hello;
+            value = {
+                default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
             } // builtins.listToAttrs (map (package: {
                 name = package;
-                value = package;
+                value = inputs.nixpkgs-unstable.legacyPackages.${target}.${package};
             }) packages);
         }) targets);
 
