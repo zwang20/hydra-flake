@@ -24,11 +24,13 @@
         "binutils"
         "blender"
         "boost"
+        "busybox"
         #c
         "chromium"
         "claws-mail"
         "cmake"
         "coreutils"
+        "coreutils-full"
         "cppcheck"
         "cups"
         "curl"
@@ -140,10 +142,12 @@
         "stdenv"
         "stellarium"
         "sudo"
+        "systemd"
         #t
         "thunderbird"
         "tmux"
         "tor"
+        "toybox"
         "transmission"
         # u
         "unbound"
