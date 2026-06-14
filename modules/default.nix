@@ -12,6 +12,9 @@
             options = [ "fmask=0077" "dmask=0077" ];
         };
     };
-    nixpkgs.config.allowUnsupportedSystem = true;
+    nixpkgs.config = {
+        allowBroken = true;
+        allowUnsupportedSystem = true;
+    };
     boot.loader.grub.devices = [ "/dev/sda" ];
 }
