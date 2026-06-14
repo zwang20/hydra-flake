@@ -183,7 +183,7 @@
         }) targets);
 
         nixosConfigurations = builtins.listToAttrs (map (target: {
-            name = "linux-${target}";
+            name = target;
             value = inputs.nixpkgs-unstable.lib.nixosSystem {
                 system = "${target}";
                 modules = [
