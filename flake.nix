@@ -98,6 +98,7 @@
         "nano"
         "neofetch"
         "neovim"
+        "networkmanager"
         "nginx"
         "nix"
         "nmap"
