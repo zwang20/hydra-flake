@@ -28,6 +28,7 @@
         #c
         "chromium"
         "claws-mail"
+        "clippy"
         "cmake"
         "coreutils"
         "coreutils-full"
