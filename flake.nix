@@ -120,7 +120,7 @@
         #p
         "p7zip"
         "pidgin"
-        "pip"
+        "pipes"
         "pihole"
         "podman"
         "postfix"
@@ -128,9 +128,10 @@
         "privoxy"
         "prometheus"
         "python"
+        "python3"
         #q
         "qemu"
-        "qt-full"
+        "qt5Full"
         #r
         "rdesktop"
         "redis"
