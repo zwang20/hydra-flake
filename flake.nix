@@ -39,6 +39,7 @@
         "darktable"
         "djvulibre"
         "dnsmasq"
+        "docker"
         "dosbox"
         "dovecot"
         "doxygen"
@@ -51,6 +52,7 @@
         "ffmpeg-full"
         "firefox"
         "fish"
+        "flatpak"
         "freecad"
         "freeciv"
         #g
@@ -119,6 +121,7 @@
         "pidgin"
         "pip"
         "pihole"
+        "podman"
         "postfix"
         "postgresql"
         "privoxy"
