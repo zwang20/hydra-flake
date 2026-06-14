@@ -155,6 +155,7 @@
         "wayland"
         "wesnoth"
         "wget"
+        "which"
         "wine"
         "wireshark"
         "xorg-server"
