@@ -197,6 +197,7 @@
                 system = "${target}";
                 modules = [
                     ./host.nix
+                    ./hosts/bungie.nix
                 ];
             };
         }) targets);
