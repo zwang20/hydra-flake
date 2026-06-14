@@ -223,7 +223,10 @@
             nixosConfigurations = builtins.listToAttrs (map (target: {
                 name = target;
                 value = self.nixosConfigurations.${target}.config.system.build.toplevel;
-            }) targets);
+            }) targets) // (builtins.listToAttrs (builtins.concatMap (target: (builtins.map (host: {
+                name = "${target}-${host}";
+                value = self.nixosConfigurations."${target}-${host}".config.system.build.toplevel;
+            }) hosts)) targets ));
         };
     };
 }

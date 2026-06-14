@@ -13,4 +13,5 @@
         };
     };
     nixpkgs.config.allowUnsupportedSystem = true;
+    boot.loader.grub.devices = [ "/dev/sda" ];
 }
