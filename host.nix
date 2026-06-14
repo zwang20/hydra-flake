@@ -17,13 +17,5 @@
     boot.initrd.availableKernelModules = [ "virtio_pci" "virtio_scsi" ];
     services = {
         openssh.enable = true;
-        desktopManager = {
-            budgie.enable = true;
-            cosmic.enable = true;
-            gnome.enable = true;
-            lomiri.enable = true;
-            pantheon.enable = true;
-            plasma6.enable = true;
-        };
     };
 }
