@@ -94,6 +94,7 @@
         "mutt"
         "mysql84"
         #n
+        "nano"
         "neofetch"
         "neovim"
         "nginx"
