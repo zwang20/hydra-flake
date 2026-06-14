@@ -48,6 +48,7 @@
         #f
         "fastfetch"
         "ffmpeg"
+        "ffmpeg-full"
         "firefox"
         "fish"
         "freecad"
