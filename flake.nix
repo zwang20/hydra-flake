@@ -182,8 +182,19 @@
             }) packages);
         }) targets);
 
+        nixosConfigurations = builtins.listToAttrs (map (target: {
+            name = "linux-${target}";
+            value = inputs.nixpkgs-unstable.lib.nixosSystem {
+                system = "${target}";
+                modules = [
+                    ./host.nix
+                ];
+            };
+        }) targets);
+
         hydraJobs = {
             inherit (self) packages;
+            inherit (self) nixosConfigurations;
         };
     };
 }
