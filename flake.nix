@@ -194,7 +194,10 @@
 
         hydraJobs = {
             inherit (self) packages;
-            inherit (self) nixosConfigurations;
+            nixosConfigurations = builtins.listToAttrs (map (target: {
+                name = target;
+                value = self.nixosConfigurations.${target}.config.system.build.toplevel;
+            }) targets);
         };
     };
 }
