@@ -81,6 +81,7 @@
         "kubernetes"
         #l
         "lame"
+        "less"
         "libreoffice"
         "linux"
         "llvm"
