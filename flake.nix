@@ -171,6 +171,15 @@
         "zeromq"
         "zsh"
     ];
+    hosts = [
+        "budgie"
+        "cosmic"
+        "gnome"
+        "lomiri"
+        "pantheon"
+        "plasma6"
+        "unbound"
+    ];
     pkgs = builtins.listToAttrs (map (target: {
         name = target;
         value = import inputs.nixpkgs-unstable {
@@ -191,16 +200,23 @@
             }) packages);
         }) targets);
 
-        nixosConfigurations = builtins.listToAttrs (map (target: {
+        nixosConfigurations = (builtins.listToAttrs (builtins.map (target: {
             name = target;
             value = inputs.nixpkgs-unstable.lib.nixosSystem {
                 system = "${target}";
                 modules = [
                     ./host.nix
-                    ./hosts/bungie.nix
                 ];
             };
-        }) targets);
+        }) targets)) // (builtins.listToAttrs (builtins.concatMap (target: (builtins.map (host: {
+            name = "${target}-${host}";
+            value = inputs.nixpkgs-unstable.lib.nixosSystem {
+                system = "${target}";
+                modules = [
+                    (./hosts + "/${host}.nix")
+                ];
+            };
+        }) hosts)) targets ));
 
         hydraJobs = {
             inherit (self) packages;

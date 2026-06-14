@@ -3,5 +3,5 @@
     imports = [
         ../modules/default.nix
     ];
-    services.desktopManager.budgie.enable = true;
+    services.desktopManager.lomiri.enable = true;
 }
