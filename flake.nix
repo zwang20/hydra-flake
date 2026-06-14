@@ -94,19 +94,73 @@
         "mutt"
         "mysql84"
         #n
+        "neofetch"
+        "neovim"
+        "nginx"
         "nix"
+        "nmap"
+        "nodejs"
+        #o
+        "octave"
+        "okular"
+        "openssh"
+        "openssl"
+        "openttd"
+        "openvpn"
         #p
+        "p7zip"
+        "pidgin"
+        "pip"
         "pihole"
         "postfix"
         "postgresql"
+        "privoxy"
         "prometheus"
+        "python"
+        #q
+        "qemu"
+        "qt-full"
+        #r
+        "rdesktop"
+        "redis"
+        "rsync"
+        "rtorrent"
+        "rustc"
         #s
         "samba"
+        "sane-backends"
+        "scribus"
+        "scummvm"
+        "smartmontools"
+        "sqlite"
+        "squid"
         "stdenv"
+        "stellarium"
+        "sudo"
         #t
+        "thunderbird"
+        "tmux"
         "tor"
+        "transmission"
         # u
         "unbound"
+        #v
+        "valgrind"
+        "vim"
+        "virtualbox"
+        "vlc"
+        #w
+        "wayland"
+        "wesnoth"
+        "wget"
+        "wine"
+        "wireshark"
+        "xorg-server"
+        "xterm"
+        "yt-dlp"
+        #z
+        "zeromq"
+        "zsh"
     ];
     pkgs = builtins.listToAttrs (map (target: {
         name = target;
