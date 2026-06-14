@@ -51,6 +51,7 @@
         "ffmpeg"
         "ffmpeg-full"
         "firefox"
+        "firefox-esr"
         "fish"
         "flatpak"
         "freecad"
