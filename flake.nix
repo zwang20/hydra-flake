@@ -19,6 +19,7 @@
         #a
         "ansible"
         "apacheHttpd"
+        "apt"
         #b
         "bash"
         "binutils"
@@ -38,6 +39,8 @@
         #d
         "darktable"
         "djvulibre"
+        "dnf4"
+        "dnf5"
         "dnsmasq"
         "docker"
         "dosbox"
@@ -91,9 +94,6 @@
         "less"
         "libreoffice"
         "linux"
-        "linuxKernel.packages.linux_6_12.kernel"
-        "linuxKernel.packages.linux_6_18.kernel"
-        "linuxKernel.packages.linux_7_0.kernel"
         "llvm"
         #m
         "mariadb-server"
@@ -122,6 +122,7 @@
         "openvpn"
         #p
         "p7zip"
+        "pacman"
         "pidgin"
         "pipes"
         "pihole"
