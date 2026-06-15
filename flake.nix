@@ -91,6 +91,8 @@
         "less"
         "libreoffice"
         "linux"
+        "linuxKernel.packages.linux_6_12.kernel"
+        "linuxKernel.packages.linux_6_18.kernel"
         "linuxKernel.packages.linux_7_0.kernel"
         "llvm"
         #m
