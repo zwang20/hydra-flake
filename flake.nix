@@ -91,6 +91,7 @@
         "less"
         "libreoffice"
         "linux"
+        "linuxKernel.packages.linux_7_0.kernel"
         "llvm"
         #m
         "mariadb-server"
