@@ -1,7 +1,7 @@
 { ... }:
 {
-    imports = [
-        ../modules/default.nix
-    ];
-    services.tor.enable = true;
+  imports = [
+    ../modules/default.nix
+  ];
+  services.tor.enable = true;
 }

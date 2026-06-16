@@ -1,7 +1,7 @@
 { ... }:
 {
-    imports = [
-        ../modules/default.nix
-    ];
-    services.desktopManager.cosmic.enable = true;
+  imports = [
+    ../modules/default.nix
+  ];
+  services.desktopManager.cosmic.enable = true;
 }

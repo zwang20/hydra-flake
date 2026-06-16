@@ -1,7 +1,7 @@
 { ... }:
 {
-    imports = [
-        ../modules/default.nix
-    ];
-    services.desktopManager.gnome.enable = true;
+  imports = [
+    ../modules/default.nix
+  ];
+  services.desktopManager.gnome.enable = true;
 }

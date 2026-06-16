@@ -1,7 +1,7 @@
 { ... }:
 {
-    imports = [
-        ../modules/default.nix
-    ];
-    services.unbound.enable = true;
+  imports = [
+    ../modules/default.nix
+  ];
+  services.unbound.enable = true;
 }

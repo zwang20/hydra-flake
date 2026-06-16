@@ -1,7 +1,7 @@
 { ... }:
 {
-    imports = [
-        ../modules/default.nix
-    ];
-    services.desktopManager.lomiri.enable = true;
+  imports = [
+    ../modules/default.nix
+  ];
+  services.desktopManager.lomiri.enable = true;
 }
