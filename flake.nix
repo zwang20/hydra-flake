@@ -57,6 +57,7 @@
         "firefox-esr"
         "fish"
         "flatpak"
+        "flatpak-builder"
         "freecad"
         "freeciv"
         #g
@@ -176,6 +177,7 @@
         "wireshark"
         "xorg-server"
         "xterm"
+        "yggdrasil"
         "yt-dlp"
         #z
         "zeromq"
