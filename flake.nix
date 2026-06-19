@@ -192,6 +192,32 @@
           name = target;
           value = import inputs.nixpkgs-unstable {
             system = "${target}";
+          };
+        }) targets
+      );
+      pkgs-broken = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = import inputs.nixpkgs-unstable {
+            system = "${target}";
+            config.allowBroken = true;
+          };
+        }) targets
+      );
+      pkgs-unsupported = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = import inputs.nixpkgs-unstable {
+            system = "${target}";
+            config.allowUnsupportedSystem = true;
+          };
+        }) targets
+      );
+      pkgs-broken-unsupported = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = import inputs.nixpkgs-unstable {
+            system = "${target}";
             config.allowBroken = true;
             config.allowUnsupportedSystem = true;
           };
@@ -209,6 +235,51 @@
             map (package: {
               name = package;
               value = pkgs.${target}.${package};
+            }) packages
+          );
+        }) targets
+      );
+
+      packages-broken = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = {
+            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
+          }
+          // builtins.listToAttrs (
+            map (package: {
+              name = package;
+              value = pkgs-broken.${target}.${package};
+            }) packages
+          );
+        }) targets
+      );
+
+      packages-unsupported = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = {
+            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
+          }
+          // builtins.listToAttrs (
+            map (package: {
+              name = package;
+              value = pkgs-unsupported.${target}.${package};
+            }) packages
+          );
+        }) targets
+      );
+
+      packages-broken-unsupported = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = {
+            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
+          }
+          // builtins.listToAttrs (
+            map (package: {
+              name = package;
+              value = pkgs-broken-unsupported.${target}.${package};
             }) packages
           );
         }) targets
@@ -243,6 +314,9 @@
 
       hydraJobs = {
         inherit (self) packages;
+        inherit (self) packages-broken;
+        inherit (self) packages-unsupported;
+        inherit (self) packages-broken-unsupported;
         nixosConfigurations =
           builtins.listToAttrs (
             map (target: {
