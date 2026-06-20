@@ -202,6 +202,20 @@
       hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
+      pkgs-x86_64 = import inputs.nixpkgs-unstable { system = "x86_64-linux"; };
+      pkgs-x32 = import inputs.nixpkgs-unstable {
+        system = "x86_64-linux";
+        overlays = [
+          (final: prev: {
+            linux-x32 = pkgs-x86_64.linuxPackagesFor (pkgs-x86_64.linux.kernel.override {
+              structuredExtraConfig = with inputs.nixpkgs-unstable.lib.kernel; {
+                X86_X32_ABI = yes;
+              };
+            });
+          })
+        ];
+      };
+
       pkgs = builtins.listToAttrs (
         map (target: {
           name = target;
@@ -240,7 +254,8 @@
       );
     in
     {
-      packages = builtins.listToAttrs (
+      _pkgs-x32 = pkgs-x32;
+      packages = (builtins.listToAttrs (
         map (target: {
           name = target;
           value = {
@@ -253,7 +268,9 @@
             }) packages
           );
         }) targets
-      );
+      )) // {
+        x86_64-linux.default = pkgs-x32.linuxPackages;
+      };
 
       packages-broken = builtins.listToAttrs (
         map (target: {
@@ -325,7 +342,14 @@
               };
             }) hosts)
           ) targets
-        ));
+        )) // {
+          "x32" = {
+            system = "x86_64-linux";
+            modules = [
+              ./host.nix
+            ];
+          };
+        };
 
       hydraJobs = {
         inherit (self) packages;
