@@ -372,6 +372,7 @@
               }) hosts)
             ) targets
           ));
+        x32 = self.nixosConfigurations.x32.config.system.build.toplevel;
       };
     };
 }
