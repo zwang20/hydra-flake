@@ -28,6 +28,7 @@
         "boost"
         "busybox"
         #c
+        "calcmysky"
         "chromium"
         "claws-mail"
         "clippy"
@@ -50,6 +51,7 @@
         #e
         "emacs"
         "evince"
+        "exiv2"
         #f
         "fastfetch"
         "ffmpeg"
@@ -65,6 +67,7 @@
         "gcc"
         "gdb"
         "geeqie"
+        "ghc"
         "gimp"
         "git"
         "gnupg"
@@ -84,6 +87,7 @@
         "i2pd"
         "i3"
         "imagemagick"
+        "indilib"
         "inkscape"
         #j
         "jellyfin"
@@ -118,6 +122,7 @@
         #o
         "octave"
         "okular"
+        "opencolorio"
         "openssh"
         "openssl"
         "openttd"
@@ -133,11 +138,17 @@
         "postgresql"
         "privoxy"
         "prometheus"
+        "prometheus-assets"
+        "protobuf"
         "python"
         "python3"
+        "python313Packages.ipython"
+        "python313Packages.sh"
+        "python313Packages.tornado"
         #q
         "qemu"
         "qt5Full"
+        "qtmultimedia"
         #r
         "rdesktop"
         "redis"
@@ -147,6 +158,7 @@
         #s
         "samba"
         "sane-backends"
+        "sbcl"
         "scribus"
         "scummvm"
         "smartmontools"
@@ -176,8 +188,11 @@
         "which"
         "wine"
         "wireshark"
+        #x
         "xorg-server"
         "xterm"
+        "xwayland"
+        #y
         "yggdrasil"
         "yt-dlp"
         #z
