@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-x32.url = "github:zwang20/nixpkgs/add-x32-again";
     nixpkgs-2605.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-2511.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-2505.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -202,19 +203,7 @@
       hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
-      pkgs-x86_64 = import inputs.nixpkgs-unstable { system = "x86_64-linux"; };
-      pkgs-x32 = import inputs.nixpkgs-unstable {
-        system = "x86_64-linux";
-        overlays = [
-          (final: prev: {
-            linux-x32 = pkgs-x86_64.linuxPackagesFor (pkgs-x86_64.linux.kernel.override {
-              structuredExtraConfig = with inputs.nixpkgs-unstable.lib.kernel; {
-                X86_X32_ABI = yes;
-              };
-            });
-          })
-        ];
-      };
+      pkgs-x32 = import inputs.nixpkgs-x32 { system = "x86_64-linux"; };
 
       pkgs = builtins.listToAttrs (
         map (target: {
@@ -254,7 +243,6 @@
       );
     in
     {
-      _pkgs-x32 = pkgs-x32;
       packages = (builtins.listToAttrs (
         map (target: {
           name = target;
@@ -343,7 +331,7 @@
             }) hosts)
           ) targets
         )) // {
-          "x32" = {
+          "x32" = inputs.nixpkgs-x32.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./host.nix

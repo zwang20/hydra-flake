@@ -80,13 +80,30 @@
         "type": "github"
       }
     },
+    "nixpkgs-x32": {
+      "locked": {
+        "lastModified": 1781999354,
+        "narHash": "sha256-dXbFWUd/GOcl14k01Ef1gcQG3qupRQhijbJs1lwWwsw=",
+        "owner": "zwang20",
+        "repo": "nixpkgs",
+        "rev": "d7203d70265301be9177055fa205fb8e484177de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zwang20",
+        "ref": "add-x32-again",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixpkgs-2411": "nixpkgs-2411",
         "nixpkgs-2505": "nixpkgs-2505",
         "nixpkgs-2511": "nixpkgs-2511",
         "nixpkgs-2605": "nixpkgs-2605",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-x32": "nixpkgs-x32"
       }
     }
   },
