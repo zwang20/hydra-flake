@@ -181,4 +181,18 @@
   #z
   "zeromq"
   "zsh"
+
+  # added packages to increase coverage across ecosystems
+  "python3Packages.numpy"
+  "python3Packages.pandas"
+  "nodePackages.yarn"
+  "ripgrep"
+  "bat"
+  "hugo"
+  "maven"
+  "gradle"
+  "rubyPackages.nokogiri"
+  "pandoc"
+  "openjdk"
+  "rust-analyzer"
 ]
