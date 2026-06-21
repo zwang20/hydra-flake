@@ -67,7 +67,7 @@
   #i
   "i2p"
   "i2pd"
-  "i3"
+  #"i3"  build gets stuck on Writing logfile
   "imagemagick"
   "indilib"
   "inkscape"
