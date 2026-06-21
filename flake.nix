@@ -17,7 +17,8 @@
         "armv7l-linux"
         "armv6l-linux"
       ];
-      packages = import ./config/packages.nix;
+      packages-x32 = import ./config/packages-x32.nix;
+      packages = inputs.nixpkgs-unstable.lib.unique ((import ./config/packages.nix) ++ packages-x32);
       hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
@@ -75,7 +76,14 @@
           );
         }) targets
       )) // {
-        x86_64-linux.default = pkgs-x32.linuxPackages;
+        x86_64-linux = {
+          default = pkgs-x32.linuxPackages;
+        } // (builtins.listToAttrs (
+          map (package: {
+            name = package;
+            value = pkgs-x32.${package};
+          }) packages-x32
+        ));
       };
 
       packages-broken = builtins.listToAttrs (
