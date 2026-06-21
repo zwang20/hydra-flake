@@ -169,6 +169,7 @@
   "wget"
   "which"
   "wine"
+  "wire-desktop"
   "wireshark"
   #x
   "xorg-server"
