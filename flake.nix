@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-x32.url = "github:zwang20/nixpkgs/add-x32-again";
     nixpkgs-2605.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-2511.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-2505.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -16,13 +15,14 @@
         #"aarch64-linux"
         "armv7l-linux"
         "armv6l-linux"
+        "powerpc64-linux"
       ];
-      packages-x32 = import ./config/packages-x32.nix;
-      packages = inputs.nixpkgs-unstable.lib.unique ((import ./config/packages.nix) ++ packages-x32);
+      #packages-x32 = import ./config/packages-x32.nix;
+      packages = inputs.nixpkgs-unstable.lib.unique ((import ./config/packages.nix)/* ++ packages-x32*/);
       hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
-      pkgs-x32 = import inputs.nixpkgs-x32 { system = "x86_64-linux"; };
+      #pkgs-x32 = import inputs.nixpkgs-x32 { system = "x86_64-linux"; };
 
       pkgs = builtins.listToAttrs (
         map (target: {
@@ -75,7 +75,7 @@
             }) packages
           );
         }) targets
-      )) // {
+      )) /* // {
         x86_64-linux = {
           default = pkgs-x32.linuxPackages;
         } // (builtins.listToAttrs (
@@ -84,7 +84,7 @@
             value = pkgs-x32.${package};
           }) packages-x32
         ));
-      };
+      } */;
 
       packages-broken = builtins.listToAttrs (
         map (target: {
@@ -156,14 +156,14 @@
               };
             }) hosts)
           ) targets
-        )) // {
+        )) /* // {
           "x32" = inputs.nixpkgs-x32.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./host.nix
             ];
           };
-        };
+        } */;
 
       hydraJobs = {
         inherit (self) packages;
@@ -186,7 +186,7 @@
               }) hosts)
             ) targets
           ));
-        x32 = self.nixosConfigurations.x32.config.system.build.toplevel;
+        # x32 = self.nixosConfigurations.x32.config.system.build.toplevel;
       };
     };
 }

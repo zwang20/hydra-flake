@@ -95,6 +95,9 @@
   "jellyfin"
   "jq"
   #k
+  "kdePackages.kate"
+  "kdePackages.kwrite"
+  "kdePackages.okular"
   "krita"
   "kubectl"
   "kubernetes"
@@ -109,7 +112,7 @@
   "linux"
   "llvm"
   #m
-  "mariadb-server"
+  "mariadb"
   "maven"
   "maxima"
   "mc"
@@ -122,7 +125,7 @@
   "mysql84"
   #n
   "nano"
-  "neofetch"
+  # "neofetch"  replaced with fastfetch
   "neovim"
   "networkmanager"
   "nginx"
@@ -133,10 +136,8 @@
   "nodePackages.eslint"
   "nodePackages.prettier"
   "nodePackages.typescript"
-  "nodePackages.yarn"
   #o
   "octave"
-  "okular"
   "opencolorio"
   "openjdk"
   "openssh"
@@ -159,16 +160,15 @@
   "postgresql"
   "privoxy"
   "prometheus"
-  "prometheus-assets"
   "protobuf"
   # "python"  python2 was removed
   "python3"
-  "python313Packages.ipython"
-  "python313Packages.sh"
-  "python313Packages.tornado"
+  "ipython"
+  "sh"
+  "tornado"
   "python313Packages.cython"
-  "python313Packages.numpy"
-  "python313Packages.pandas"
+  "numpy"
+  "pandas"
   "python313Packages.pillow"
   "python313Packages.requests"
   "python313Packages.scikit-learn"
@@ -178,7 +178,7 @@
   #q
   "qemu"
   "qt5Full"
-  "qtmultimedia"
+  "qt5.qtmultimedia"
   #r
   "rdesktop"
   "redis"
@@ -230,6 +230,7 @@
   "xterm"
   "xwayland"
   #y
+  "yarn"
   "yggdrasil"
   "yt-dlp"
   #z
