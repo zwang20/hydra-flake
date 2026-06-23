@@ -19,6 +19,7 @@
       ];
       #packages-x32 = import ./config/packages-x32.nix;
       packages = inputs.nixpkgs-unstable.lib.unique ((import ./config/packages.nix)/* ++ packages-x32*/);
+      python-packages = import ./config/python-packages.nix;
       hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
@@ -131,6 +132,13 @@
         }) targets
       );
 
+      python-packages = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = pkgs.i686-linux.python3.withPackages (python-pkgs: with python-pkgs; python-packages);
+        }) targets
+      );
+
       nixosConfigurations =
         (builtins.listToAttrs (
           builtins.map (target: {
@@ -170,6 +178,7 @@
         inherit (self) packages-broken;
         inherit (self) packages-unsupported;
         inherit (self) packages-broken-unsupported;
+        inherit (self) python-packages;
         nixosConfigurations =
           builtins.listToAttrs (
             map (target: {

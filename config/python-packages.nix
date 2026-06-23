@@ -1,0 +1,14 @@
+[
+    "cython"
+    "ipython"
+    "mgspec"
+    "pandas"
+    "pillow"
+    "requests"
+    "scikit-learn"
+    "scipy"
+    "setuptools"
+    "sh"
+    "tornado"
+    "wheel"
+]
