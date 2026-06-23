@@ -116,6 +116,7 @@
   "libpng"
   "libreoffice"
   "libultrahdr"
+  "libuv"
   "linux"
   "llvm"
   #m
