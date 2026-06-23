@@ -146,6 +146,7 @@
   #"numpy"
   #o
   "octave"
+  "openblas"
   "opencolorio"
   "openjdk"
   "openssh"
