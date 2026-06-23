@@ -135,12 +135,12 @@
       python-packages = builtins.listToAttrs (
         map (target: {
           name = target;
-          value = map (
+          value = builtins.listToAttrs ( map (
             package: {
               name = package;
               value = pkgs.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
             }
-          ) python-packages;
+          ) python-packages );
         }) targets
       );
 
