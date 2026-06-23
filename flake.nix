@@ -135,7 +135,12 @@
       python-packages = builtins.listToAttrs (
         map (target: {
           name = target;
-          value = pkgs.i686-linux.python3.withPackages (python-pkgs: with python-pkgs; python-packages);
+          value = map (
+            package: {
+              name = package;
+              value = pkgs.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
+            }
+          ) python-packages;
         }) targets
       );
 
