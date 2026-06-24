@@ -67,6 +67,7 @@
   "ghc"
   "gimp"
   "git"
+  "gnum4"
   "gnupg"
   "go"
   "godot"
@@ -240,4 +241,5 @@
   "zeromq"
   "zlib"
   "zsh"
+  "zstd"
 ]

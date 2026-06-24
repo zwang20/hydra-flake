@@ -18,8 +18,9 @@
         "powerpc64-linux"
       ];
       _marches = [
-        "x86-64-v3"
+        # "x86-64-v3"  # bootstrapping gcc does not understand
         "skylake"
+        "znver3"
       ];
       _packages = import ./config/packages.nix;
       _python-packages = import ./config/python-packages.nix;
