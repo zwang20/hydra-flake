@@ -20,6 +20,7 @@
       _marches = [
         # "x86-64-v3"  # bootstrapping gcc does not understand
         "skylake"
+        "btver2"
         "znver3"
       ];
       _packages = import ./config/packages.nix;
