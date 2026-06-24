@@ -128,7 +128,7 @@
   "mc"
   "mesa"
   "meson"
-  "mongodb"
+  # "mongodb" unfree
   "mono"
   "mplayer"
   "mutt"
@@ -159,7 +159,7 @@
   "openvpn"
   #p
   "p7zip"
-  "packer"
+  # "packer" unfree
   "pacman"
   "pandoc"
   "pcre2"
@@ -206,7 +206,7 @@
   "sudo"
   "systemd"
   #t
-  "terraform"
+  #"terraform" unfree
   #"silver-searcher" has been removed as it has seen no development since 2020 and is stuck on the obsolete pcre library
   "thunderbird"
   "tmux"

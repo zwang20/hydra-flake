@@ -40,11 +40,13 @@
         map (march: {
           name = march;
           value = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
             config.allowBroken = true;
             config.allowUnsupportedSystem = true;
-            gcc.arch = march;
-            gcc.tune = march;
+            localSystem = {
+              system = "x86_64-linux";
+              gcc.arch = march;
+              gcc.tune = march;
+            };
           };
         }) _marches
       ));
