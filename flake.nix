@@ -9,7 +9,7 @@
   outputs =
     { self, ... }@inputs:
     let
-      targets = [
+      _targets = [
         #"x86_64-linux"
         "i686-linux"
         #"aarch64-linux"
@@ -17,41 +17,16 @@
         "armv6l-linux"
         "powerpc64-linux"
       ];
-      #packages-x32 = import ./config/packages-x32.nix;
-      packages = inputs.nixpkgs-unstable.lib.unique ((import ./config/packages.nix)/* ++ packages-x32*/);
-      python-packages = import ./config/python-packages.nix;
-      hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
+      _marches = [
+        "x86-64-v3"
+        "skylake"
+      ];
+      _packages = import ./config/packages.nix;
+      _python-packages = import ./config/python-packages.nix;
+      _hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
-      #pkgs-x32 = import inputs.nixpkgs-x32 { system = "x86_64-linux"; };
-
-      pkgs = builtins.listToAttrs (
-        map (target: {
-          name = target;
-          value = import inputs.nixpkgs-unstable {
-            system = "${target}";
-          };
-        }) targets
-      );
-      pkgs-broken = builtins.listToAttrs (
-        map (target: {
-          name = target;
-          value = import inputs.nixpkgs-unstable {
-            system = "${target}";
-            config.allowBroken = true;
-          };
-        }) targets
-      );
-      pkgs-unsupported = builtins.listToAttrs (
-        map (target: {
-          name = target;
-          value = import inputs.nixpkgs-unstable {
-            system = "${target}";
-            config.allowUnsupportedSystem = true;
-          };
-        }) targets
-      );
-      pkgs-broken-unsupported = builtins.listToAttrs (
+      _pkgs = (builtins.listToAttrs (
         map (target: {
           name = target;
           value = import inputs.nixpkgs-unstable {
@@ -59,78 +34,50 @@
             config.allowBroken = true;
             config.allowUnsupportedSystem = true;
           };
-        }) targets
-      );
+        }) _targets
+      ))
+      // (builtins.listToAttrs (
+        map (march: {
+          name = march;
+          value = import inputs.nixpkgs-unstable {
+            system = "x86_64-linux";
+            config.allowBroken = true;
+            config.allowUnsupportedSystem = true;
+            gcc.arch = march;
+            gcc.tune = march;
+          };
+        }) _marches
+      ));
     in
     {
       packages = (builtins.listToAttrs (
         map (target: {
           name = target;
           value = {
-            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
+            default = _pkgs.${target}.hello;
           }
           // builtins.listToAttrs (
             map (package: {
               name = package;
-              value = pkgs.${target}.${package};
-            }) packages
+              value = _pkgs.${target}.${package};
+            }) _packages
           );
-        }) targets
-      )) /* // {
-        x86_64-linux = {
-          default = pkgs-x32.linuxPackages;
-        } // (builtins.listToAttrs (
-          map (package: {
-            name = package;
-            value = pkgs-x32.${package};
-          }) packages-x32
-        ));
-      } */;
-
-      packages-broken = builtins.listToAttrs (
-        map (target: {
-          name = target;
+        }) _targets
+      ))
+      // (builtins.listToAttrs (
+        map (march: {
+          name = march;
           value = {
-            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
+            default = _pkgs.${march}.hello;
           }
           // builtins.listToAttrs (
             map (package: {
               name = package;
-              value = pkgs-broken.${target}.${package};
-            }) packages
+              value = _pkgs.${march}.${package};
+            }) _packages
           );
-        }) targets
-      );
-
-      packages-unsupported = builtins.listToAttrs (
-        map (target: {
-          name = target;
-          value = {
-            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
-          }
-          // builtins.listToAttrs (
-            map (package: {
-              name = package;
-              value = pkgs-unsupported.${target}.${package};
-            }) packages
-          );
-        }) targets
-      );
-
-      packages-broken-unsupported = builtins.listToAttrs (
-        map (target: {
-          name = target;
-          value = {
-            default = inputs.nixpkgs-unstable.legacyPackages.${target}.hello;
-          }
-          // builtins.listToAttrs (
-            map (package: {
-              name = package;
-              value = pkgs-broken-unsupported.${target}.${package};
-            }) packages
-          );
-        }) targets
-      );
+        }) _marches
+      ));
 
       python-packages = builtins.listToAttrs (
         map (target: {
@@ -138,10 +85,10 @@
           value = builtins.listToAttrs ( map (
             package: {
               name = package;
-              value = pkgs.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
+              value = _pkgs.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
             }
-          ) python-packages );
-        }) targets
+          ) _python-packages );
+        }) _targets
       );
 
       nixosConfigurations =
@@ -154,7 +101,7 @@
                 ./host.nix
               ];
             };
-          }) targets
+          }) _targets
         ))
         // (builtins.listToAttrs (
           builtins.concatMap (
@@ -167,8 +114,8 @@
                   (./hosts + "/${host}.nix")
                 ];
               };
-            }) hosts)
-          ) targets
+            }) _hosts)
+          ) _targets
         )) /* // {
           "x32" = inputs.nixpkgs-x32.lib.nixosSystem {
             system = "x86_64-linux";
@@ -180,16 +127,13 @@
 
       hydraJobs = {
         inherit (self) packages;
-        inherit (self) packages-broken;
-        inherit (self) packages-unsupported;
-        inherit (self) packages-broken-unsupported;
         inherit (self) python-packages;
         nixosConfigurations =
           builtins.listToAttrs (
             map (target: {
               name = target;
               value = self.nixosConfigurations.${target}.config.system.build.toplevel;
-            }) targets
+            }) _targets
           )
           // (builtins.listToAttrs (
             builtins.concatMap (
@@ -197,8 +141,8 @@
               (builtins.map (host: {
                 name = "${target}-${host}";
                 value = self.nixosConfigurations."${target}-${host}".config.system.build.toplevel;
-              }) hosts)
-            ) targets
+              }) _hosts)
+            ) _targets
           ));
         # x32 = self.nixosConfigurations.x32.config.system.build.toplevel;
       };

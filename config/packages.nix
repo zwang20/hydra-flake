@@ -26,6 +26,7 @@
   "coreutils-full"
   #"cpanminus"
   "cppcheck"
+  "criu"
   "cups"
   "curl"
   #d
@@ -88,6 +89,7 @@
   "home-assistant"
   "hugo"
   "hydra"
+  "hydra-cli"
   "hyprland"
   #i
   "i2p"
@@ -138,6 +140,7 @@
   "networkmanager"
   "nginx"
   "nix"
+  "nix-info"
   "nmap"
   "nodejs"
   #"nodePackages.esbuild"
@@ -179,6 +182,7 @@
   #"qt5Full" qt5Full has been removed
   #"qt5.qtmultimedia"
   #r
+  "rapidjson"
   "rdesktop"
   "redis"
   "ripgrep"
