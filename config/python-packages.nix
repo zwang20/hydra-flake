@@ -1,7 +1,7 @@
 [
     "cython"
     "ipython"
-    "mgspec"
+    "msgspec"
     "pandas"
     "pillow"
     "requests"
