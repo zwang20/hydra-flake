@@ -1,10 +1,7 @@
 {
   inputs = {
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-2605.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-2511.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-2505.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-2411.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
   outputs =
     { self, ... }@inputs:
@@ -29,7 +26,31 @@
       _hosts = builtins.map (host: (builtins.replaceStrings [ ".nix" ] [ "" ] host)) (
         builtins.attrNames (builtins.readDir (./hosts))
       );
-      _pkgs = (builtins.listToAttrs (
+      _pkgs_nixos = (builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = import inputs.nixos-unstable {
+            system = "${target}";
+            config.allowBroken = true;
+            config.allowUnsupportedSystem = true;
+          };
+        }) _targets
+      ))
+      // (builtins.listToAttrs (
+        map (march: {
+          name = march;
+          value = import inputs.nixos-unstable {
+            config.allowBroken = true;
+            config.allowUnsupportedSystem = true;
+            localSystem = {
+              system = "x86_64-linux";
+              gcc.arch = march;
+              gcc.tune = march;
+            };
+          };
+        }) _marches
+      ));
+      _pkgs_nixpkgs = (builtins.listToAttrs (
         map (target: {
           name = target;
           value = import inputs.nixpkgs-unstable {
@@ -55,16 +76,16 @@
       ));
     in
     {
-      packages = (builtins.listToAttrs (
+      packages-nixos = (builtins.listToAttrs (
         map (target: {
           name = target;
           value = {
-            default = _pkgs.${target}.hello;
+            default = _pkgs_nixos.${target}.hello;
           }
           // builtins.listToAttrs (
             map (package: {
               name = package;
-              value = _pkgs.${target}.${package};
+              value = _pkgs_nixos.${target}.${package};
             }) _packages
           );
         }) _targets
@@ -73,24 +94,65 @@
         map (march: {
           name = march;
           value = {
-            default = _pkgs.${march}.hello;
+            default = _pkgs_nixos.${march}.hello;
           }
           // builtins.listToAttrs (
             map (package: {
               name = package;
-              value = _pkgs.${march}.${package};
+              value = _pkgs_nixos.${march}.${package};
             }) _packages
           );
         }) _marches
       ));
 
-      python-packages = builtins.listToAttrs (
+      packages-nixpkgs = (builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = {
+            default = _pkgs_nixpkgs.${target}.hello;
+          }
+          // builtins.listToAttrs (
+            map (package: {
+              name = package;
+              value = _pkgs_nixpkgs.${target}.${package};
+            }) _packages
+          );
+        }) _targets
+      ))
+      // (builtins.listToAttrs (
+        map (march: {
+          name = march;
+          value = {
+            default = _pkgs_nixpkgs.${march}.hello;
+          }
+          // builtins.listToAttrs (
+            map (package: {
+              name = package;
+              value = _pkgs_nixpkgs.${march}.${package};
+            }) _packages
+          );
+        }) _marches
+      ));
+
+      python-packages-nixos = builtins.listToAttrs (
         map (target: {
           name = target;
           value = builtins.listToAttrs ( map (
             package: {
               name = package;
-              value = _pkgs.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
+              value = _pkgs_nixos.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
+            }
+          ) _python-packages );
+        }) _targets
+      );
+
+      python-packages-nixpkgs = builtins.listToAttrs (
+        map (target: {
+          name = target;
+          value = builtins.listToAttrs ( map (
+            package: {
+              name = package;
+              value = _pkgs_nixpkgs.${target}.python3.withPackages (python-pkgs: [ python-pkgs.${package} ]);
             }
           ) _python-packages );
         }) _targets
@@ -100,7 +162,7 @@
         (builtins.listToAttrs (
           builtins.map (target: {
             name = target;
-            value = inputs.nixpkgs-unstable.lib.nixosSystem {
+            value = inputs.nixos-unstable.lib.nixosSystem {
               system = "${target}";
               modules = [
                 ./host.nix
@@ -113,7 +175,7 @@
             target:
             (builtins.map (host: {
               name = "${target}-${host}";
-              value = inputs.nixpkgs-unstable.lib.nixosSystem {
+              value = inputs.nixos-unstable.lib.nixosSystem {
                 system = "${target}";
                 modules = [
                   (./hosts + "/${host}.nix")
@@ -122,7 +184,7 @@
             }) _hosts)
           ) _targets
         )) /* // {
-          "x32" = inputs.nixpkgs-x32.lib.nixosSystem {
+          "x32" = inputs.nixos-x32.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./host.nix
@@ -131,8 +193,10 @@
         } */;
 
       hydraJobs = {
-        inherit (self) packages;
-        inherit (self) python-packages;
+        inherit (self) packages-nixos;
+        inherit (self) packages-nixpkgs;
+        inherit (self) python-packages-nixos;
+        inherit (self) python-packages-nixpkgs;
         nixosConfigurations =
           builtins.listToAttrs (
             map (target: {

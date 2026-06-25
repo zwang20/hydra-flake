@@ -43,6 +43,7 @@
   "dovecot"
   "doxygen"
   #e
+  "elfutils"
   "emacs"
   "evince"
   "exabgp"
@@ -91,6 +92,7 @@
   "home-assistant"
   "hugo"
   "hydra"
+  "hydra-check"
   "hydra-cli"
   "hyprland"
   #i
@@ -100,6 +102,7 @@
   "imagemagick"
   "indilib"
   "inkscape"
+  "ispc"
   #j
   "jellyfin"
   "jq"
@@ -145,6 +148,7 @@
   "nix-info"
   "nmap"
   "nodejs"
+  "nlohmann_json"
   #"nodePackages.esbuild"
   #"nodePackages.eslint"
   #"nodePackages.prettier"

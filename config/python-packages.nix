@@ -4,6 +4,7 @@
     "msgspec"
     "pandas"
     "pillow"
+    "pytest"
     "requests"
     "scikit-learn"
     "scipy"
