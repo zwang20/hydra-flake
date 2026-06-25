@@ -67,6 +67,7 @@
   "ghc"
   "gimp"
   "git"
+  "gnugrep"
   "gnum4"
   "gnupg"
   "go"
