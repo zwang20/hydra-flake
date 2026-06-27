@@ -7,12 +7,6 @@
     { self, ... }@inputs:
     let
       _targets = [
-        #"x86_64-linux"
-        "i686-linux"
-        #"aarch64-linux"
-        "armv7l-linux"
-        "armv6l-linux"
-        "powerpc64-linux"
       ];
       _marches = [
         # "x86-64-v3"  # bootstrapping gcc does not understand
