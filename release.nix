@@ -3,6 +3,7 @@
     system,
 }:
 let
+    packages = import ./config/packages.nix;
     pkgs = import nixpkgs {
         inherit system;
         config.allowBroken = true;
@@ -10,8 +11,11 @@ let
     };
 in
 {
-    jobs = {
-        hello = pkgs.hello;
-    };
+    jobs = builtins.listToAttrs (
+        map (package: {
+            name = package;
+            value = pkgs.${package};
+        }) packages
+    );
 }
 
