@@ -2,10 +2,16 @@
     nixpkgs,
     system,
 }:
-
+let
+    pkgs = nixpkgs {
+        system = system;
+        config.allowBroken = true;
+        config.allowUnsupportedSystem = true;
+    };
+in
 {
     jobs = {
-        hello = nixpkgs.legacyPackages.system.hello;
+        hello = pkgs.hello;
     };
 }
 
