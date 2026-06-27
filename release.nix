@@ -3,8 +3,8 @@
     system,
 }:
 let
-    pkgs = nixpkgs {
-        system = system;
+    pkgs = import nixpkgs {
+        inherit system;
         config.allowBroken = true;
         config.allowUnsupportedSystem = true;
     };
