@@ -11,7 +11,7 @@ let
     };
 in
 {
-    jobs = builtins.listToAttrs (
+    ${system} = builtins.listToAttrs (
         map (package: {
             name = package;
             value = pkgs.${package};
