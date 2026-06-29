@@ -9,12 +9,13 @@ let
         config.allowBroken = true;
         config.allowUnsupportedSystem = true;
     };
+    lib = pkgs.lib;
 in
 {
     ${system} = builtins.listToAttrs (
         map (package: {
             name = package;
-            value = pkgs.${package};
+            value = lib.attrByPath (lib.splitString "." package) null pkgs;
         }) packages
     );
 }

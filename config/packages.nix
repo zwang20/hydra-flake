@@ -69,6 +69,7 @@
   "ghc"
   "gimp"
   "git"
+  "gjs"
   "gnugrep"
   "gnum4"
   "gnupg"
@@ -186,6 +187,7 @@
   "prometheus"
   "protobuf"
   "python3"
+  "python313Packages.ipython"
   # "python"  python2 was removed
   #q
   "qemu"
