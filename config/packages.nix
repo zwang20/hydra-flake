@@ -84,6 +84,7 @@
   "gnugrep"
   "gnum4"
   "gnupg"
+  "gnutar"
   "go"
   "godot"
   "golangci-lint"
@@ -126,6 +127,7 @@
   "jq"
   #k
   "kdePackages.kate"
+  "kdePackages.kuserfeedback"
   "kdePackages.kwrite"
   "kdePackages.okular"
   "krita"
@@ -212,7 +214,9 @@
   "protobuf"
   # "python"  python2 was removed
   "python3"
+  "python313Packages.cython"
   "python313Packages.ipython"
+  "python313Packages.markupsafe"
   "python313Packages.msgspec"
   #q
   "qemu"
@@ -252,6 +256,7 @@
   "transmission_4"
   # u
   "unbound"
+  "unzip"
   #v
   "valgrind"
   "vim"
