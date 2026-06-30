@@ -186,9 +186,10 @@
   "privoxy"
   "prometheus"
   "protobuf"
+  # "python"  python2 was removed
   "python3"
   "python313Packages.ipython"
-  # "python"  python2 was removed
+  "python313Packages.msgspec"
   #q
   "qemu"
   #"qt5Full" qt5Full has been removed
