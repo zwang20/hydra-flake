@@ -8,5 +8,5 @@ nix-instantiate release.nix --arg system \"i686-linux\" --arg nixpkgs "import <n
 ## sort
 ```bash
 sort config/packages.nix | uniq | grep -v -F '[' | grep -v -F ']' > tmp
-
+{ echo '[' ; cat tmp; echo ']'; } > config/packages.nix; rm tmp
 ```
