@@ -284,4 +284,10 @@
   "zlib"
   "zsh"
   "zstd"
+  "hwdata"
+  "check"
+  "mailcap"
+  "getopt"
+  "nspr"
+  "libidn"
 ]
