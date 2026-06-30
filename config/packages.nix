@@ -1,15 +1,18 @@
 [
+
   #a
   "ack"
   "ansible"
   "apacheHttpd"
   "apt"
   "attr"
+  "audit"
   "autoconf"
   "automake"
   #b
   "bash"
   "bat"
+  "bc"
   "bintools"
   "binutils"
   "bison"
@@ -39,6 +42,7 @@
   "curl"
   #d
   "darktable"
+  "dejagnu"
   "delve"
   "diffutils"
   "djvulibre"
@@ -128,6 +132,7 @@
   "i2p"
   "i2pd"
   # "i3"  build gets stuck on Writing logfile
+  "iana-etc"
   "imagemagick"
   "indilib"
   "inkscape"
@@ -157,7 +162,9 @@
   "libical"
   "libidn"
   "libjpeg"
+  "liblinear"
   "libmpeg2"
+  "libndp"
   "libnl"
   "libpcap"
   "libpng"
@@ -193,6 +200,7 @@
   # "neofetch"  replaced with fastfetch
   "neovim"
   "networkmanager"
+  "nghttp2"
   "nginx"
   "nix"
   "nix-info"
@@ -212,6 +220,7 @@
   "openblas"
   "opencolorio"
   "openjdk"
+  "openresolv"
   "openssh"
   "openssl"
   "openttd"
@@ -241,6 +250,7 @@
   "python313Packages.ipython"
   "python313Packages.markupsafe"
   "python313Packages.msgspec"
+  "python3Minimal"
   # "python"  python2 was removed
   #q
   "qemu"
