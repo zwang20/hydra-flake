@@ -163,6 +163,8 @@
   "libabw"
   "libacars"
   "libaccounts-glib"
+  "libad9361"
+  "libadwaita"
   "libcbor"
   "libcpuid"
   "libev"
