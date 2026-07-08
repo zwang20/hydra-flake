@@ -1,6 +1,9 @@
 # hydra-flake
 packages for hydra to build, in flake form
 
+http://hydra.home.arpa:3000/project/nixpkgs
+
+## test eval
 ```bash
 nix-instantiate release.nix --arg system \"i686-linux\" --arg nixpkgs "import <nixpkgs>" --eval -A i686-linux
 ```
