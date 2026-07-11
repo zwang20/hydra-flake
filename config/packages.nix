@@ -650,6 +650,8 @@
   "python313Packages.ipython"
   "python313Packages.markupsafe"
   "python313Packages.msgspec"
+  "python313Packages.sphinx"
+  "python314Packages.sphinx"
   "python3Minimal"
   # "python"  python2 was removed
   #q
